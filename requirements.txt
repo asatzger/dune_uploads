@@ -1,0 +1,4 @@
+dune-client>=0.1.0
+python-dotenv
+pandas>=2.0.0
+requests 

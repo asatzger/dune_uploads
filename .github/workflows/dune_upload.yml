@@ -1,0 +1,33 @@
+name: Upload CSV to Dune Analytics
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Runs once a day at midnight UTC
+  workflow_dispatch:  # Allows manual triggering
+  push:
+    branches:
+      - main
+
+jobs:
+  upload-csv:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install dune-client python-dotenv pandas requests
+
+      - name: Create .env file with Dune API Key
+        run: echo "DUNE_API_KEY=${{ secrets.DUNE_API_KEY }}" > .env
+
+      - name: Run CSV Upload Script
+        run: python scripts/upload_to_dune.py 
