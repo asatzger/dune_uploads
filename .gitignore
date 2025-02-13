@@ -1,0 +1,15 @@
+# Byte-compiled / optimized / DLL files
+*.py[cod]
+__pycache__/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Virtual environment folders
+env/
+venv/
+
+# Local environment variables file (contains sensitive information)
+.env 
